@@ -15,7 +15,7 @@
 */
 
 MotorState TaskState2 = MOVE_FORWARD1;
-MotorState TaskState34 = MOVE_RIGHT;
+MotorState TaskState34 = MOVE_RIGHT1;
 
 // 数据处理逻辑在 stm32h7xx_it.c
 
