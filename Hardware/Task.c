@@ -89,6 +89,8 @@ void Task3()
   {
   case MOVE_RIGHT1:
 
+    // 方向校正
+  
     // 开始直行 然后循迹
     while (sensor.c == 0 && sensor.l1 == 0 && sensor.l2 == 0 && sensor.r1 == 0 && sensor.r2 == 0)
     {
