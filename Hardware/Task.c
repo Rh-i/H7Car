@@ -113,11 +113,17 @@ void Task3()
     // 方向校正
 
     // 开始直行 然后循迹
+
+    Buzzer(); // 开始响一次
+
     while (sensor.c == 0 && sensor.l1 == 0 && sensor.l2 == 0 && sensor.r1 == 0 && sensor.r2 == 0)
     {
       Motor_Control(Task_left_pwm, Task_right_pwm);
     }
     TaskState34 = MOVE_SENSOR;
+
+    Buzzer(); // 结束响一次
+
     break;
 
   case MOVE_SENSOR:
@@ -129,22 +135,32 @@ void Task3()
 
     // 方向校正 同上
 
+    Buzzer(); // 开始响一次
+
     while (sensor.c == 0 && sensor.l1 == 0 && sensor.l2 == 0 && sensor.r1 == 0 && sensor.r2 == 0)
     {
       Motor_Control(Task_left_pwm, Task_right_pwm);
     }
     TaskState34 = MOVE_SENSOR;
+
+    Buzzer(); // 结束响一次
+
     break;
 
   case MOVE_RIGHT2:
 
     // 方向校正 同上
 
+    Buzzer(); // 开始响一次
+
     while (sensor.c == 0 && sensor.l1 == 0 && sensor.l2 == 0 && sensor.r1 == 0 && sensor.r2 == 0)
     {
       Motor_Control(Task_left_pwm, Task_right_pwm);
     }
     TaskState34 = MOVE_SENSOR;
+
+    Buzzer(); // 结束响一次
+
     break;
   }
 }

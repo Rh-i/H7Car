@@ -42,11 +42,13 @@ void Task_solver() // 放主函数while循环中 然后执行Task的任务 任�
     Task_Flag = __HAL_TIM_GET_COUNTER(&hlptim2);
     if (Task_Flag == Task_Count == 1)
     {
+        Buzzer(); // 切换模式响一次
         Task1();
         Task_Count++;
     }
     if (Task_Flag == Task_Count == 2)
     {
+        Buzzer(); // 切换模式响一次
         Task2();
         Task_Count++;
     }
@@ -55,6 +57,7 @@ void Task_solver() // 放主函数while循环中 然后执行Task的任务 任�
 
     if (Task_Flag == Task_Count == 3 || Task_Flag == Task_Count == 4)
     {
+        Buzzer(); // 切换模式响一次
         Task3();
         Task_Count++;
     }
