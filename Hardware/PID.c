@@ -52,6 +52,7 @@ int forward_left_pwm()
 {
   return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)  * 10;
 }
+
 int forward_right_pwm()
 {
   return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)* 10;

@@ -50,6 +50,9 @@ void Task_solver() // 放主函数while循环中 然后执行Task的任务 任�
         Task2();
         Task_Count++;
     }
+    
+    // 调试的时候 编码器拧3下执行3模式 4下执行4模式
+
     if (Task_Flag == Task_Count == 3 || Task_Flag == Task_Count == 4)
     {
         Task3();
