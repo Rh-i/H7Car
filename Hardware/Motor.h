@@ -40,7 +40,7 @@ typedef struct Control
 // #define DIN1_Pin GPIO_PIN_6
 // #define DIN2_Pin GPIO_PIN_7
 
-#define PWM_MAX 800  // 最大PWM值
+#define PWM_MAX 800 // 最大PWM值
 
 void Motor_Init();
 void Motor_Control(int left_pwm, int right_pwm);

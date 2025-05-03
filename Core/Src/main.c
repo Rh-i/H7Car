@@ -15,35 +15,35 @@
  *   中断函数和Task文件 俩个进行交互需要extern的 不要乱写 不会就问 报错了就跟我说 查ai也行
  *   所有电机的正反转没有去校正 你需要校正 陀螺仪也需要用串口的上位机校准 如何使用这个陀螺仪你来学(JY61P 型号) 我不想搞了
  *   按照我这个接线 实在看不懂接线 那你总能看懂代码把 自己想办法改 CUBEMX都有哪个引脚 我没备注就是了
- *   OLED我没写它的使用 你要写你就开一个新的中断来更新屏幕 软件iic的 别搞其他花活 
- * 
+ *   OLED我没写它的使用 你要写你就开一个新的中断来更新屏幕 软件iic的 别搞其他花活
+ *
  * 1. 所有全局变量的定义or声明都在各个.h文件中（包括main.h的几个变量）。各个结构体也是
- * 
+ *
  * 2. 代码存在位置：（每一个对应的头文件都有写代码）
  *    1. 陀螺仪的：Gyroscope.c （需要调试 以及校准到0）
  *    2. 循迹模块：Sensor.c   （循迹模块以及对应的权重output修改）
  *    3. 输出计算：PID.c      （PID计算 两环 没调参  以及各个运行模式的pwm计算函数）
  *    4. 编码器的：Encoder.c （电机编码器和旋钮编码器）
- *    5. 屏幕显示：OLED.c （软件IIC 计数1000刷新 写在while循环里）            
+ *    5. 屏幕显示：OLED.c （软件IIC 计数1000刷新 写在while循环里）
  *    6. 主函数的：main.c （这里面只写了类状态机的任务执行 .h内没文件）
  *    7. 自制时钟：Delay.c（32位 71分钟才能完成一次）
- *    8. 电机控制：Motor.c（电机正反转基础在这里写的） 
+ *    8. 电机控制：Motor.c（电机正反转基础在这里写的）
  *    9. 中断调用：stm32h7xx_it.c 中断触发函数 （最下面 好好找） （和Task执行函数相互照应）
  *    10.任务执行：Task.c  所有的执行（Task.c中是执行逻辑 中断中是数据接收处理逻辑 看代码的时候要俩一起看 一起改）
- * 
+ *
  * 3.统计外设使用情况（引脚自己去cube里面找 我在代码里面是能找到引脚咋使用的）
  *    1.陀螺仪 UART4 带了DMA以及终端数据接收以及处理
  *    2.Motor TIM1 以及八个控制正反转的gpio PD0-PD7
  *    3.Encoder TIM3 TIM4 TIM5 TIM8 各两个引脚   旋钮编码器LPTIM2（可能有bug）
  *    4.Delay TIM2 32位的 不会溢出
  *    5.其他就是gpio输入输出引脚
- * 
+ *
  * 4.中断使用情况 （TIM原生为275MHZ）（优先级没指定 都是0）
  *    1.陀螺仪处理的dma完成触发中断
  *    2.1ms中断进行编码器读数 pwm输出 （TIM6）
- * 
- * 
- * 
+ *
+ *
+ *
  * Copyright (c) 2024 STMicroelectronics.
  * All rights reserved.
  *
@@ -109,9 +109,9 @@ static void MPU_Config(void);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
 
@@ -167,36 +167,37 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-    // 所有的任务都在这个函数里面 所以while循环会一直在这个函数内部执行 所以除了这个函数别的什么都不要写进while循环 如果需要oled屏幕显示的话 需要自己配置定时器中断显示 20hz就行 
-    // 这个代码需要旋钮编码器来选择模式 记得安装一个 任务执行只能1 2 3的顺序 通过旋转编码器选择模式  不能乱序执行 ||若要测试特定的就拧到对应位置测一次 然后断电|| 重复此前操作可以测试第二次 亦或者你直接把某个值写成对应的数据也可以 
-    void Task_solver(); 
-
+    // 所有的任务都在这个函数里面 所以while循环会一直在这个函数内部执行 所以除了这个函数别的什么都不要写进while循环 如果需要oled屏幕显示的话 需要自己配置定时器中断显示 20hz就行
+    // 这个代码需要旋钮编码器来选择模式 记得安装一个 任务执行只能1 2 3的顺序 通过旋转编码器选择模式  不能乱序执行 ||若要测试特定的就拧到对应位置测一次 然后断电|| 重复此前操作可以测试第二次 亦或者你直接把某个值写成对应的数据也可以
+    void Task_solver();
   }
   /* USER CODE END 3 */
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Supply configuration update enable
-  */
+   */
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
 
   /** Configure the main internal regulator output voltage
-  */
+   */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
 
-  while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+  while (!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY))
+  {
+  }
 
   /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
   RCC_OscInitStruct.HSICalibrationValue = 64;
@@ -216,10 +217,8 @@ void SystemClock_Config(void)
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
-                              |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
+   */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2 | RCC_CLOCKTYPE_D3PCLK1 | RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
@@ -238,7 +237,7 @@ void SystemClock_Config(void)
 
 /* USER CODE END 4 */
 
- /* MPU Configuration */
+/* MPU Configuration */
 
 void MPU_Config(void)
 {
@@ -248,7 +247,7 @@ void MPU_Config(void)
   HAL_MPU_Disable();
 
   /** Initializes and configures the Region and the memory to be protected
-  */
+   */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.Number = MPU_REGION_NUMBER0;
   MPU_InitStruct.BaseAddress = 0x0;
@@ -264,13 +263,12 @@ void MPU_Config(void)
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
-
 }
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -282,14 +280,14 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */

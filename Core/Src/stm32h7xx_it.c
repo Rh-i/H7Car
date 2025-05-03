@@ -243,7 +243,7 @@ void TIM6_DAC_IRQHandler(void)
   Encoder_Update(&encoder_R1, &htim5);
   // Encoder_Update(&encoder_R2, &htim8);
   static uint32_t time_tim6;
-  time_tim6 = Get_Micros(); 
+  time_tim6 = Get_Micros();
 
   if (Buzzer_flag == 1)
   {
@@ -279,7 +279,6 @@ void TIM6_DAC_IRQHandler(void)
       {
         static int Sensor_pwm;
         Sensor_pwm = Dual_PID_Calculate(&ctrl, 0, Sensor_output, DIRECTION_LOOP, ENCODER_CYCLE);
-
         Task_left_pwm = sensor_left_pwm(Sensor_pwm);
         Task_right_pwm = sensor_right_pwm(Sensor_pwm);
       }
@@ -330,7 +329,6 @@ void TIM6_DAC_IRQHandler(void)
       {
         static int Sensor_pwm34;
         Sensor_pwm34 = Dual_PID_Calculate(&ctrl, 0, Sensor_output, DIRECTION_LOOP, ENCODER_CYCLE);
-
         Task_left_pwm = sensor_left_pwm(Sensor_pwm34);
         Task_right_pwm = sensor_right_pwm(Sensor_pwm34);
       }
@@ -341,13 +339,7 @@ void TIM6_DAC_IRQHandler(void)
           static uint8_t task34count = 0;
           task34count++;
           // 循迹了8次 第一次结束进入左 第二次结束进入右
-          if (task34count == 8 && Task_Flag == 4)
-          {
-            TaskState34 = STOP;
-            Temp_Time = 0;
-            task34count = 0;
-          }
-          else if (task34count == 2 && Task_Flag == 3) 
+          if (task34count == 8 && Task_Flag == 4 || task34count == 2 && Task_Flag == 3)
           {
             TaskState34 = STOP;
             Temp_Time = 0;
