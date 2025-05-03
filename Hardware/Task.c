@@ -19,6 +19,15 @@ MotorState TaskState34 = MOVE_RIGHT1;
 
 // 数据处理逻辑在 stm32h7xx_it.c
 
+// 蜂鸣器相关
+volatile uint8_t Buzzer_flag = 0;
+volatile uint32_t Buzzer_time = 0;
+void Buzzer() // 调用一次buzzer 他就响一次
+{
+  Buzzer_flag = 1;
+  Buzzer_time = Get_Micros();
+}
+
 /* ************************************************************************* */
 
 void Task1()
@@ -30,6 +39,7 @@ void Task1()
   }
 
   Motor_Control(0, 0);
+  Buzzer();
 }
 
 /* ************************************************************************* */
@@ -39,11 +49,17 @@ void Task2()
   switch (TaskState2)
   {
   case MOVE_FORWARD1: // 第一次直行不需要校正
+
+    Buzzer(); // 开始响一次
+
     while (sensor.c == 0 && sensor.l1 == 0 && sensor.l2 == 0 && sensor.r1 == 0 && sensor.r2 == 0)
     {
       Motor_Control(Task_left_pwm, Task_right_pwm);
     }
     TaskState2 = MOVE_SENSOR;
+
+    Buzzer(); // 结束响一次
+
     break;
 
   case MOVE_SENSOR:
@@ -66,18 +82,23 @@ void Task2()
       你也可以用陀螺仪的 detla角 来转向
       如果陀螺仪不偏移误差 那这个位置可以写转向环PID让航向角归零
     */
+
+    Buzzer(); // 开始响一次
+
     while (sensor.c == 0 && sensor.l1 == 0 && sensor.l2 == 0 && sensor.r1 == 0 && sensor.r2 == 0)
     {
       Motor_Control(Task_left_pwm, Task_right_pwm);
     }
     TaskState2 = MOVE_SENSOR;
+
+    Buzzer(); // 结束响一次
+
     break;
 
   case STOP:
     Motor_Control(0, 0);
+    Buzzer(); // 结束响一次
     break;
-
-
   }
 }
 
@@ -90,7 +111,7 @@ void Task3()
   case MOVE_RIGHT1:
 
     // 方向校正
-  
+
     // 开始直行 然后循迹
     while (sensor.c == 0 && sensor.l1 == 0 && sensor.l2 == 0 && sensor.r1 == 0 && sensor.r2 == 0)
     {
@@ -98,9 +119,9 @@ void Task3()
     }
     TaskState34 = MOVE_SENSOR;
     break;
-  
+
   case MOVE_SENSOR:
-    
+
     Motor_Control(Task_left_pwm, Task_right_pwm);
     break;
 
@@ -125,6 +146,5 @@ void Task3()
     }
     TaskState34 = MOVE_SENSOR;
     break;
-
   }
 }

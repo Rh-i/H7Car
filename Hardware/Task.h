@@ -29,8 +29,11 @@ typedef enum
 void Task1();
 void Task2();
 void Task3();
-void Task4();
+void Buzzer();
 
 extern MotorState TaskState2, TaskState34;
+extern volatile uint8_t Buzzer_flag;
+extern volatile uint32_t Buzzer_time;
+
 
 #endif

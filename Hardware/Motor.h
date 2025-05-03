@@ -32,17 +32,15 @@ typedef struct Control
 #define BIN1_Pin GPIO_PIN_2
 #define BIN2_Pin GPIO_PIN_3
 
-#define CIN_GPIO_Port GPIOD
-#define DIN_GPIO_Port GPIOD
+// #define CIN_GPIO_Port GPIOD
+// #define DIN_GPIO_Port GPIOD
 
-#define CIN1_Pin GPIO_PIN_4 // 修改正反转
-#define CIN2_Pin GPIO_PIN_5
-#define DIN1_Pin GPIO_PIN_6
-#define DIN2_Pin GPIO_PIN_7
+// #define CIN1_Pin GPIO_PIN_4 // 修改正反转
+// #define CIN2_Pin GPIO_PIN_5
+// #define DIN1_Pin GPIO_PIN_6
+// #define DIN2_Pin GPIO_PIN_7
 
-#define PWM_MAX 1000  // 最大PWM值
-#define TRACK_VALUE 1 // 路径环控制量
-#define SPEED_VALUE 2 // 速度环控制量
+#define PWM_MAX 800  // 最大PWM值
 
 void Motor_Init();
 void Motor_Control(int left_pwm, int right_pwm);

@@ -29,8 +29,8 @@ float Dual_PID_Calculate(DualPID *pid, float target, float current, uint8_t loop
   }
 
   // 循迹环
-  if (loop_type == DIRECTION_LOOP) 
-  //output的范围为-125~125 +-到对应的pwm上
+  if (loop_type == DIRECTION_LOOP)
+  // output的范围为-125~125 +-到对应的pwm上
   {
     integral[1] += error * dt;
     output = pid->Kp_direction * error + pid->Ki_direction * integral[1] + pid->Kd_direction * (error - pid->prev_error[1]) / dt;
@@ -46,24 +46,23 @@ float Dual_PID_Calculate(DualPID *pid, float target, float current, uint8_t loop
   return output;
 }
 
-
-// PID计算的一个过程函数 
+// PID计算的一个过程函数
 // 除以2是取平均 乘以10是把RPM转换成pwm
 int forward_left_pwm()
 {
-  return (Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) + Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L2.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)) / 2 * 10;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)  * 10;
 }
 int forward_right_pwm()
 {
-  return (Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) + Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R2.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)) / 2 * 10;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)* 10;
 }
 
 int sensor_left_pwm(int Sensor_pwm)
 {
-  return Task_left_pwm = (Dual_PID_Calculate(&ctrl, BASE_RPM - Sensor_pwm / 10, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) + Dual_PID_Calculate(&ctrl, BASE_RPM - Sensor_pwm / 10, encoder_L2.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)) / 2 * 10;
+  return  Dual_PID_Calculate(&ctrl, BASE_RPM - Sensor_pwm / 10, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)  * 10;
 }
 
 int sensor_right_pwm(int Sensor_pwm)
 {
-  return (Dual_PID_Calculate(&ctrl, BASE_RPM + Sensor_pwm / 10, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) + Dual_PID_Calculate(&ctrl, BASE_RPM + Sensor_pwm / 10, encoder_R2.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE)) / 2 * 10;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + Sensor_pwm / 10, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 10;
 }

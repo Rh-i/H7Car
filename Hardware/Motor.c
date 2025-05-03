@@ -12,8 +12,8 @@ void Motor_Init()
 {
   HAL_TIM_PWM_Start(&MOTOR_HTIM, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&MOTOR_HTIM, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&MOTOR_HTIM, TIM_CHANNEL_3);
-  HAL_TIM_PWM_Start(&MOTOR_HTIM, TIM_CHANNEL_4);
+  // HAL_TIM_PWM_Start(&MOTOR_HTIM, TIM_CHANNEL_3);
+  // HAL_TIM_PWM_Start(&MOTOR_HTIM, TIM_CHANNEL_4);
 }
 
 void Motor_Control(int left_pwm, int right_pwm) // 最终处理正反转 等等 控制pwm PWM计算我不写在这了 单独算
@@ -23,10 +23,10 @@ void Motor_Control(int left_pwm, int right_pwm) // 最终处理正反转 等等 
   HAL_GPIO_WritePin(AIN_GPIO_Port, AIN2_Pin, (left_pwm > 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);
   HAL_GPIO_WritePin(BIN_GPIO_Port, BIN1_Pin, (right_pwm > 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
   HAL_GPIO_WritePin(BIN_GPIO_Port, BIN2_Pin, (right_pwm > 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);
-  HAL_GPIO_WritePin(CIN_GPIO_Port, CIN1_Pin, (left_pwm > 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(CIN_GPIO_Port, CIN2_Pin, (left_pwm > 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);
-  HAL_GPIO_WritePin(DIN_GPIO_Port, DIN1_Pin, (right_pwm > 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(DIN_GPIO_Port, DIN2_Pin, (right_pwm > 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  // HAL_GPIO_WritePin(CIN_GPIO_Port, CIN1_Pin, (left_pwm > 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+  // HAL_GPIO_WritePin(CIN_GPIO_Port, CIN2_Pin, (left_pwm > 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  // HAL_GPIO_WritePin(DIN_GPIO_Port, DIN1_Pin, (right_pwm > 0) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+  // HAL_GPIO_WritePin(DIN_GPIO_Port, DIN2_Pin, (right_pwm > 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);
 
   // 限制PWM范围
   left_pwm = fmax(fmin(left_pwm, PWM_MAX), -PWM_MAX);
@@ -35,6 +35,6 @@ void Motor_Control(int left_pwm, int right_pwm) // 最终处理正反转 等等 
   // 设置PWM输出 PWM最小值以及死区问题忽略不计 应该无所谓的
   __HAL_TIM_SET_COMPARE(&MOTOR_HTIM, TIM_CHANNEL_1, (uint16_t)(left_pwm > 0 ? left_pwm : -left_pwm));
   __HAL_TIM_SET_COMPARE(&MOTOR_HTIM, TIM_CHANNEL_2, (uint16_t)(right_pwm > 0 ? right_pwm : -right_pwm));
-  __HAL_TIM_SET_COMPARE(&MOTOR_HTIM, TIM_CHANNEL_3, (uint16_t)(left_pwm > 0 ? left_pwm : -left_pwm));
-  __HAL_TIM_SET_COMPARE(&MOTOR_HTIM, TIM_CHANNEL_4, (uint16_t)(right_pwm > 0 ? right_pwm : -right_pwm));
+  // __HAL_TIM_SET_COMPARE(&MOTOR_HTIM, TIM_CHANNEL_3, (uint16_t)(left_pwm > 0 ? left_pwm : -left_pwm));
+  // __HAL_TIM_SET_COMPARE(&MOTOR_HTIM, TIM_CHANNEL_4, (uint16_t)(right_pwm > 0 ? right_pwm : -right_pwm));
 }

@@ -55,7 +55,7 @@
 volatile long long int Task_left_pwm;
 volatile long long int Task_right_pwm;
 
-volatile uint64_t Temp_Time = 0;
+volatile uint32_t Temp_Time = 0;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -239,9 +239,21 @@ void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
   Encoder_Update(&encoder_L1, &htim3);
-  Encoder_Update(&encoder_L2, &htim4);
+  // Encoder_Update(&encoder_L2, &htim4);
   Encoder_Update(&encoder_R1, &htim5);
-  Encoder_Update(&encoder_R2, &htim8);
+  // Encoder_Update(&encoder_R2, &htim8);
+  static uint32_t time_tim6;
+  time_tim6 = Get_Micros(); 
+
+  if (Buzzer_flag == 1)
+  {
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+    if (time_tim6 - Buzzer_time > 1e6)
+    {
+      Buzzer_flag = 0;
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);
+    }
+  }
 
   /* ************************************************************************* */
 
@@ -278,7 +290,7 @@ void TIM6_DAC_IRQHandler(void)
           static uint8_t task2count = 0;
           task2count++;
           // 循迹了两次 第一次结束进入2 第二次结束停止
-          if (task2count == 2) 
+          if (task2count == 2)
           {
             TaskState2 = STOP;
             Temp_Time = 0;
@@ -296,16 +308,16 @@ void TIM6_DAC_IRQHandler(void)
 
     if (TaskState2 == MOVE_FORWARD2) // 直行2
     {
-      Task_left_pwm =forward_left_pwm();
-      Task_right_pwm =forward_right_pwm();
+      Task_left_pwm = forward_left_pwm();
+      Task_right_pwm = forward_right_pwm();
     }
   }
 
   /* ************************************************************************* */
 
-  if (Task_Flag == Task_Count == 3)
+  if (Task_Flag == Task_Count == 3) // 任务34的数据处理
   {
-    if(TaskState34 == MOVE_RIGHT1 ||TaskState34 == MOVE_RIGHT2 || TaskState34 == MOVE_LEFT2)
+    if (TaskState34 == MOVE_RIGHT1 || TaskState34 == MOVE_RIGHT2 || TaskState34 == MOVE_LEFT2)
     {
       Task_left_pwm = forward_left_pwm();
       Task_right_pwm = forward_right_pwm();
@@ -328,28 +340,33 @@ void TIM6_DAC_IRQHandler(void)
         {
           static uint8_t task34count = 0;
           task34count++;
-          // 循迹了两次 第一次结束进入2 第二次结束停止
-          if (task34count == 8) 
+          // 循迹了8次 第一次结束进入左 第二次结束进入右
+          if (task34count == 8 && Task_Flag == 4)
           {
-            TaskState2 = STOP;
+            TaskState34 = STOP;
+            Temp_Time = 0;
+            task34count = 0;
+          }
+          else if (task34count == 2 && Task_Flag == 3) 
+          {
+            TaskState34 = STOP;
             Temp_Time = 0;
             task34count = 0;
           }
           else if (task34count % 2 == 1)
           {
-            TaskState2 = MOVE_LEFT2;
+            TaskState34 = MOVE_LEFT2;
             Temp_Time = 0;
           }
           else if (task34count % 2 == 0)
           {
-            TaskState2 = MOVE_RIGHT2;
+            TaskState34 = MOVE_RIGHT2;
             Temp_Time = 0;
           }
         }
         Temp_Time = Get_Micros(); // 记录
       }
     }
-
   }
 
   /* USER CODE END TIM6_DAC_IRQn 0 */

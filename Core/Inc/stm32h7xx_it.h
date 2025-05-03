@@ -63,7 +63,7 @@ void TIM6_DAC_IRQHandler(void);
 extern volatile long long int Task_left_pwm;
 extern volatile long long int Task_right_pwm;
 
-extern volatile uint64_t Temp_Time;
+extern volatile uint32_t Temp_Time;
 
 /* USER CODE END EFP */
 
