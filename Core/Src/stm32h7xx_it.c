@@ -70,8 +70,8 @@ extern DMA_HandleTypeDef hdma_uart4_tx;
 /*           Cortex Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
- * @brief This function handles Non maskable interrupt.
- */
+  * @brief This function handles Non maskable interrupt.
+  */
 void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
@@ -85,8 +85,8 @@ void NMI_Handler(void)
 }
 
 /**
- * @brief This function handles Hard fault interrupt.
- */
+  * @brief This function handles Hard fault interrupt.
+  */
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
@@ -100,8 +100,8 @@ void HardFault_Handler(void)
 }
 
 /**
- * @brief This function handles Memory management fault.
- */
+  * @brief This function handles Memory management fault.
+  */
 void MemManage_Handler(void)
 {
   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
@@ -115,8 +115,8 @@ void MemManage_Handler(void)
 }
 
 /**
- * @brief This function handles Pre-fetch fault, memory access fault.
- */
+  * @brief This function handles Pre-fetch fault, memory access fault.
+  */
 void BusFault_Handler(void)
 {
   /* USER CODE BEGIN BusFault_IRQn 0 */
@@ -130,8 +130,8 @@ void BusFault_Handler(void)
 }
 
 /**
- * @brief This function handles Undefined instruction or illegal state.
- */
+  * @brief This function handles Undefined instruction or illegal state.
+  */
 void UsageFault_Handler(void)
 {
   /* USER CODE BEGIN UsageFault_IRQn 0 */
@@ -145,8 +145,8 @@ void UsageFault_Handler(void)
 }
 
 /**
- * @brief This function handles System service call via SWI instruction.
- */
+  * @brief This function handles System service call via SWI instruction.
+  */
 void SVC_Handler(void)
 {
   /* USER CODE BEGIN SVCall_IRQn 0 */
@@ -158,8 +158,8 @@ void SVC_Handler(void)
 }
 
 /**
- * @brief This function handles Debug monitor.
- */
+  * @brief This function handles Debug monitor.
+  */
 void DebugMon_Handler(void)
 {
   /* USER CODE BEGIN DebugMonitor_IRQn 0 */
@@ -171,8 +171,8 @@ void DebugMon_Handler(void)
 }
 
 /**
- * @brief This function handles Pendable request for system service.
- */
+  * @brief This function handles Pendable request for system service.
+  */
 void PendSV_Handler(void)
 {
   /* USER CODE BEGIN PendSV_IRQn 0 */
@@ -184,8 +184,8 @@ void PendSV_Handler(void)
 }
 
 /**
- * @brief This function handles System tick timer.
- */
+  * @brief This function handles System tick timer.
+  */
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
@@ -205,8 +205,8 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
- * @brief This function handles DMA1 stream0 global interrupt.
- */
+  * @brief This function handles DMA1 stream0 global interrupt.
+  */
 void DMA1_Stream0_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream0_IRQn 0 */
@@ -219,8 +219,8 @@ void DMA1_Stream0_IRQHandler(void)
 }
 
 /**
- * @brief This function handles DMA1 stream7 global interrupt.
- */
+  * @brief This function handles DMA1 stream7 global interrupt.
+  */
 void DMA1_Stream7_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream7_IRQn 0 */
@@ -233,8 +233,8 @@ void DMA1_Stream7_IRQHandler(void)
 }
 
 /**
- * @brief This function handles TIM6 global interrupt, DAC1_CH1 and DAC1_CH2 underrun error interrupts.
- */
+  * @brief This function handles TIM6 global interrupt, DAC1_CH1 and DAC1_CH2 underrun error interrupts.
+  */
 void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
@@ -244,6 +244,8 @@ void TIM6_DAC_IRQHandler(void)
   // Encoder_Update(&encoder_R2, &htim8);
   static uint32_t time_tim6;
   time_tim6 = Get_Micros();
+  Sensor_Dispose(); // 实时计算偏差
+
 
   if (Buzzer_flag == 1)
   {
@@ -257,14 +259,14 @@ void TIM6_DAC_IRQHandler(void)
 
   /* ************************************************************************* */
 
-  if (Task_Flag == Task_Count == 1) // 任务1数据处理
+  if (Task_Flag == 1 && Task_Count == 1) // 任务1数据处理
   {
     Task_left_pwm = forward_left_pwm();
     Task_right_pwm = forward_right_pwm();
   }
   /* ************************************************************************* */
 
-  if (Task_Flag == Task_Count == 2) // 任务2数据处理
+  if (Task_Flag == 2 && Task_Count == 2) // 任务2数据处理
   {
     if (TaskState2 == MOVE_FORWARD1) // 直行1
     {
@@ -274,7 +276,6 @@ void TIM6_DAC_IRQHandler(void)
 
     if (TaskState2 == MOVE_SENSOR) // 循迹 两次均用这个
     {
-      Sensor_Dispose(); // 实时计算偏差
       if (sensor.c || sensor.l1 || sensor.l2 || sensor.r1 || sensor.r2)
       {
         static int Sensor_pwm;
@@ -314,7 +315,7 @@ void TIM6_DAC_IRQHandler(void)
 
   /* ************************************************************************* */
 
-  if (Task_Flag == Task_Count == 3) // 任务34的数据处理
+  if (Task_Flag == 3 && Task_Count == 3) // 任务34的数据处理
   {
     if (TaskState34 == MOVE_RIGHT1 || TaskState34 == MOVE_RIGHT2 || TaskState34 == MOVE_LEFT2)
     {
@@ -324,7 +325,6 @@ void TIM6_DAC_IRQHandler(void)
 
     if (TaskState34 == MOVE_SENSOR) // 循迹 八次均用这个
     {
-      Sensor_Dispose(); // 实时计算偏差
       if (sensor.c || sensor.l1 || sensor.l2 || sensor.r1 || sensor.r2)
       {
         static int Sensor_pwm34;
@@ -339,7 +339,7 @@ void TIM6_DAC_IRQHandler(void)
           static uint8_t task34count = 0;
           task34count++;
           // 循迹了8次 第一次结束进入左 第二次结束进入右
-          if (task34count == 8 && Task_Flag == 4 || task34count == 2 && Task_Flag == 3)
+          if ((task34count == 8 && Task_Flag == 4 )|| (task34count == 2 && Task_Flag == 3))
           {
             TaskState34 = STOP;
             Temp_Time = 0;

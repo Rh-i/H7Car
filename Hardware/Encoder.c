@@ -34,7 +34,7 @@ void Encoder_Update(Encoder *enc, TIM_HandleTypeDef *htim) // 编码器更新函
     enc->raw_count = (int32_t)__HAL_TIM_GET_COUNTER(htim);                             // 获取计数值，并转 int32_t 类型 此处AI报错 但每次采样计数值很小 不会溢出
     __HAL_TIM_SET_COUNTER(htim, 32767);                                                // 清空定时器的计数值，以便下一次采样
     enc->rpm = ((32767 - enc->raw_count) * 60) / (ENCODER_RESOLUTION * ENCODER_CYCLE); // 脉冲数*60s/(每转脉冲数×采样周期秒) 采样周期
-    enc->filtered_rpm = 0.8f * enc->filtered_rpm + 0.2f * enc->rpm;                    // 对计算得到的转速进行低通滤波处理，减少噪声干扰 0.2
+    enc->filtered_rpm = 0.2f * enc->filtered_rpm + 0.8f * enc->rpm;                    // 对计算得到的转速进行低通滤波处理，减少噪声干扰 0.2
 }
 
 void Task_solver() // 放主函数while循环中 然后执行Task的任务 任务内的运动数据处理 就还在中断中进行 然后回来

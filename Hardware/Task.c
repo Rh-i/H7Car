@@ -39,6 +39,7 @@ void Task1()
   }
 
   Motor_Control(0, 0);
+
   Buzzer();
 }
 
@@ -46,6 +47,7 @@ void Task1()
 
 void Task2()
 {
+
   switch (TaskState2)
   {
   case MOVE_FORWARD1: // 第一次直行不需要校正
@@ -69,6 +71,7 @@ void Task2()
     // 同样的也可以加入角度的判断来大致判断是否在循迹
     // 自动变成MOVE_FORWARD2 和 STOP
     Motor_Control(Task_left_pwm, Task_right_pwm);
+
     break;
 
   case MOVE_FORWARD2:
@@ -98,6 +101,7 @@ void Task2()
   case STOP:
     Motor_Control(0, 0);
     Buzzer(); // 结束响一次
+
     break;
   }
 }

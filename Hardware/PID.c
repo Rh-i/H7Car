@@ -8,8 +8,8 @@ const uint8_t SPEED_LOOP = 0;
 const uint8_t DIRECTION_LOOP = 1;
 
 DualPID ctrl = {
-    .Kp_speed = 1.0, .Ki_speed = 0.0, .Kd_speed = 0.1, .Kp_direction = 0.5, .Ki_direction = 0.0, .Kd_direction = 0.05, // 示例值，根据实际情况调整
-    .prev_error = {0, 0}                                                                                               // 确保所有元素都被初始化
+    .Kp_speed = 10, .Ki_speed = 0.0, .Kd_speed = 10, .Kp_direction = 0.5, .Ki_direction = 0.0, .Kd_direction = 0.05, 
+    .prev_error = {0, 0}                                                                                               
 };
 
 float Dual_PID_Calculate(DualPID *pid, float target, float current, uint8_t loop_type, float dt)
@@ -47,23 +47,23 @@ float Dual_PID_Calculate(DualPID *pid, float target, float current, uint8_t loop
 }
 
 // PID计算的一个过程函数
-// 除以2是取平均 乘以10是把RPM转换成pwm
+// 乘以10是把RPM转换成pwm
 int forward_left_pwm()
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 10;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 40;
 }
 
 int forward_right_pwm()
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 10;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 40;
 }
 
 int sensor_left_pwm(int Sensor_pwm)
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM - Sensor_pwm / 10, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 10;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM - Sensor_pwm / 10, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 100;
 }
 
 int sensor_right_pwm(int Sensor_pwm)
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM + Sensor_pwm / 10, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 10;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + Sensor_pwm / 10, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 100;
 }

@@ -1,0 +1,401 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.39.0.0
+Copyright (C) 2023 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ADMIN admin, ADMIN, LIC=HN0AE-5VIL4-12HLE-5AYJ1-R47UA-ALSDP
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.39.0.0
+Toolchain Path:  D:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.39.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.2.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\Users\admin\Desktop\work\STM32 Code\H7Car\MDK-ARM\H7Car.uvprojx
+Project File Date:  05/04/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'H7Car'
+assembling startup_stm32h723xx.s...
+compiling stm32h7xx_hal.c...
+compiling memorymap.c...
+compiling Gyroscope.c...
+..\Hardware\Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+..\Hardware\Gyroscope.c(102): warning:  #1-D: last line of file ends without a newline
+  }
+..\Hardware\Gyroscope.c: 2 warnings, 0 errors
+compiling gpio.c...
+compiling stm32h7xx_it.c...
+../Hardware/Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+../Hardware/Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+../Hardware/Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Hardware/Encoder.h(27): warning:  #1295-D: Deprecated declaration Encoder_Init - give arg types
+  void Encoder_Init();
+../Hardware/Encoder.h(29): warning:  #1295-D: Deprecated declaration Task_solver - give arg types
+  void Task_solver();
+../Hardware/Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+../Hardware/Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+../Hardware/PID.h(28): warning:  #1295-D: Deprecated declaration forward_left_pwm - give arg types
+  int forward_left_pwm();
+../Hardware/PID.h(29): warning:  #1295-D: Deprecated declaration forward_right_pwm - give arg types
+  int forward_right_pwm();
+../Hardware/PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+../Hardware/Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+../Hardware/Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+../Hardware/Motor.h(45): warning:  #1295-D: Deprecated declaration Motor_Init - give arg types
+  void Motor_Init();
+../Hardware/Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+../Hardware/Task.h(29): warning:  #1295-D: Deprecated declaration Task1 - give arg types
+  void Task1();
+../Hardware/Task.h(30): warning:  #1295-D: Deprecated declaration Task2 - give arg types
+  void Task2();
+../Hardware/Task.h(31): warning:  #1295-D: Deprecated declaration Task3 - give arg types
+  void Task3();
+../Hardware/Task.h(32): warning:  #1295-D: Deprecated declaration Buzzer - give arg types
+  void Buzzer();
+../Hardware/Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Src/stm32h7xx_it.c: 19 warnings, 0 errors
+compiling usart.c...
+compiling Encoder.c...
+..\Hardware\Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+..\Hardware\Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+..\Hardware\Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+..\Hardware\Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\PID.h(28): warning:  #1295-D: Deprecated declaration forward_left_pwm - give arg types
+  int forward_left_pwm();
+..\Hardware\PID.h(29): warning:  #1295-D: Deprecated declaration forward_right_pwm - give arg types
+  int forward_right_pwm();
+..\Hardware\PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+..\Hardware\Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+..\Hardware\Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+..\Hardware\Motor.h(45): warning:  #1295-D: Deprecated declaration Motor_Init - give arg types
+  void Motor_Init();
+..\Hardware\Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+..\Hardware\Task.h(29): warning:  #1295-D: Deprecated declaration Task1 - give arg types
+  void Task1();
+..\Hardware\Task.h(30): warning:  #1295-D: Deprecated declaration Task2 - give arg types
+  void Task2();
+..\Hardware\Task.h(31): warning:  #1295-D: Deprecated declaration Task3 - give arg types
+  void Task3();
+..\Hardware\Task.h(32): warning:  #1295-D: Deprecated declaration Buzzer - give arg types
+  void Buzzer();
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\Encoder.h(27): warning:  #1295-D: Deprecated declaration Encoder_Init - give arg types
+  void Encoder_Init();
+..\Hardware\Encoder.h(29): warning:  #1295-D: Deprecated declaration Task_solver - give arg types
+  void Task_solver();
+..\Hardware\Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+..\Hardware\Encoder.c: 20 warnings, 0 errors
+compiling OLED.c...
+compiling Sensor.c...
+..\Hardware\Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+..\Hardware\Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+..\Hardware\Sensor.c: 2 warnings, 0 errors
+compiling lptim.c...
+compiling stm32h7xx_hal_flash_ex.c...
+compiling Motor.c...
+..\Hardware\Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+..\Hardware\Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\Encoder.h(27): warning:  #1295-D: Deprecated declaration Encoder_Init - give arg types
+  void Encoder_Init();
+..\Hardware\Encoder.h(29): warning:  #1295-D: Deprecated declaration Task_solver - give arg types
+  void Task_solver();
+..\Hardware\Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+..\Hardware\Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+..\Hardware\PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+..\Hardware\Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+..\Hardware\Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+..\Hardware\Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+..\Hardware\Task.h(29): warning:  #1295-D: Deprecated declaration Task1 - give arg types
+  void Task1();
+..\Hardware\Task.h(30): warning:  #1295-D: Deprecated declaration Task2 - give arg types
+  void Task2();
+..\Hardware\Task.h(31): warning:  #1295-D: Deprecated declaration Task3 - give arg types
+  void Task3();
+..\Hardware\Task.h(32): warning:  #1295-D: Deprecated declaration Buzzer - give arg types
+  void Buzzer();
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\PID.h(28): warning:  #1295-D: Deprecated declaration forward_left_pwm - give arg types
+  int forward_left_pwm();
+..\Hardware\PID.h(29): warning:  #1295-D: Deprecated declaration forward_right_pwm - give arg types
+  int forward_right_pwm();
+..\Hardware\PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+..\Hardware\Motor.h(45): warning:  #1295-D: Deprecated declaration Motor_Init - give arg types
+  void Motor_Init();
+..\Hardware\Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+..\Hardware\Motor.c: 21 warnings, 0 errors
+compiling stm32h7xx_hal_rcc.c...
+compiling stm32h7xx_hal_cortex.c...
+compiling stm32h7xx_hal_mdma.c...
+compiling Delay.c...
+..\Hardware\Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+..\Hardware\Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+..\Hardware\Delay.c: 2 warnings, 0 errors
+compiling PID.c...
+..\Hardware\Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+..\Hardware\Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\Encoder.h(27): warning:  #1295-D: Deprecated declaration Encoder_Init - give arg types
+  void Encoder_Init();
+..\Hardware\Encoder.h(29): warning:  #1295-D: Deprecated declaration Task_solver - give arg types
+  void Task_solver();
+..\Hardware\Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+..\Hardware\Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+..\Hardware\PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+..\Hardware\Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+..\Hardware\Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+..\Hardware\Motor.h(45): warning:  #1295-D: Deprecated declaration Motor_Init - give arg types
+  void Motor_Init();
+..\Hardware\Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+..\Hardware\Task.h(29): warning:  #1295-D: Deprecated declaration Task1 - give arg types
+  void Task1();
+..\Hardware\Task.h(30): warning:  #1295-D: Deprecated declaration Task2 - give arg types
+  void Task2();
+..\Hardware\Task.h(31): warning:  #1295-D: Deprecated declaration Task3 - give arg types
+  void Task3();
+..\Hardware\Task.h(32): warning:  #1295-D: Deprecated declaration Buzzer - give arg types
+  void Buzzer();
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\PID.h(28): warning:  #1295-D: Deprecated declaration forward_left_pwm - give arg types
+  int forward_left_pwm();
+..\Hardware\PID.h(29): warning:  #1295-D: Deprecated declaration forward_right_pwm - give arg types
+  int forward_right_pwm();
+..\Hardware\PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+..\Hardware\PID.c(69): warning:  #1-D: last line of file ends without a newline
+  }
+..\Hardware\PID.c: 21 warnings, 0 errors
+compiling stm32h7xx_hal_lptim.c...
+compiling stm32h7xx_hal_flash.c...
+compiling dma.c...
+../Hardware/Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+../Hardware/Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+../Hardware/Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+../Hardware/Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+../Hardware/Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Hardware/PID.h(28): warning:  #1295-D: Deprecated declaration forward_left_pwm - give arg types
+  int forward_left_pwm();
+../Hardware/PID.h(29): warning:  #1295-D: Deprecated declaration forward_right_pwm - give arg types
+  int forward_right_pwm();
+../Hardware/PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+../Hardware/Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+../Hardware/Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+../Hardware/Motor.h(45): warning:  #1295-D: Deprecated declaration Motor_Init - give arg types
+  void Motor_Init();
+../Hardware/Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+../Hardware/Task.h(29): warning:  #1295-D: Deprecated declaration Task1 - give arg types
+  void Task1();
+../Hardware/Task.h(30): warning:  #1295-D: Deprecated declaration Task2 - give arg types
+  void Task2();
+../Hardware/Task.h(31): warning:  #1295-D: Deprecated declaration Task3 - give arg types
+  void Task3();
+../Hardware/Task.h(32): warning:  #1295-D: Deprecated declaration Buzzer - give arg types
+  void Buzzer();
+../Hardware/Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Hardware/Encoder.h(27): warning:  #1295-D: Deprecated declaration Encoder_Init - give arg types
+  void Encoder_Init();
+../Hardware/Encoder.h(29): warning:  #1295-D: Deprecated declaration Task_solver - give arg types
+  void Task_solver();
+../Hardware/Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+../Core/Src/dma.c: 20 warnings, 0 errors
+compiling Task.c...
+..\Hardware\Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+..\Hardware\Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\Encoder.h(27): warning:  #1295-D: Deprecated declaration Encoder_Init - give arg types
+  void Encoder_Init();
+..\Hardware\Encoder.h(29): warning:  #1295-D: Deprecated declaration Task_solver - give arg types
+  void Task_solver();
+..\Hardware\Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+..\Hardware\Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+..\Hardware\PID.h(28): warning:  #1295-D: Deprecated declaration forward_left_pwm - give arg types
+  int forward_left_pwm();
+..\Hardware\PID.h(29): warning:  #1295-D: Deprecated declaration forward_right_pwm - give arg types
+  int forward_right_pwm();
+..\Hardware\PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+..\Hardware\Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+..\Hardware\Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+..\Hardware\Motor.h(45): warning:  #1295-D: Deprecated declaration Motor_Init - give arg types
+  void Motor_Init();
+..\Hardware\Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+..\Hardware\Task.h(29): warning:  #1295-D: Deprecated declaration Task1 - give arg types
+  void Task1();
+..\Hardware\Task.h(30): warning:  #1295-D: Deprecated declaration Task2 - give arg types
+  void Task2();
+..\Hardware\Task.h(31): warning:  #1295-D: Deprecated declaration Task3 - give arg types
+  void Task3();
+..\Hardware\Task.h(32): warning:  #1295-D: Deprecated declaration Buzzer - give arg types
+  void Buzzer();
+..\Hardware\Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Hardware\Task.c: 19 warnings, 0 errors
+compiling tim.c...
+compiling stm32h7xx_hal_msp.c...
+compiling stm32h7xx_hal_hsem.c...
+compiling stm32h7xx_hal_pwr.c...
+compiling stm32h7xx_hal_rcc_ex.c...
+compiling main.c...
+../Hardware/Delay.h(9): warning:  #1295-D: Deprecated declaration Get_Micros - give arg types
+  uint32_t Get_Micros();
+../Hardware/Delay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif // _Delay_h
+../Hardware/Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+../Hardware/Gyroscope.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // _GYROSCOPE_H
+../Hardware/Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Hardware/PID.h(28): warning:  #1295-D: Deprecated declaration forward_left_pwm - give arg types
+  int forward_left_pwm();
+../Hardware/PID.h(29): warning:  #1295-D: Deprecated declaration forward_right_pwm - give arg types
+  int forward_right_pwm();
+../Hardware/PID.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif // _PID_H
+../Hardware/Sensor.h(24): warning:  #1295-D: Deprecated declaration Sensor_Dispose - give arg types
+  void Sensor_Dispose();
+../Hardware/Sensor.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif // _SENSOR_H
+../Hardware/Motor.h(45): warning:  #1295-D: Deprecated declaration Motor_Init - give arg types
+  void Motor_Init();
+../Hardware/Motor.h(48): warning:  #1-D: last line of file ends without a newline
+  #endif // Motor_h
+../Hardware/Task.h(29): warning:  #1295-D: Deprecated declaration Task1 - give arg types
+  void Task1();
+../Hardware/Task.h(30): warning:  #1295-D: Deprecated declaration Task2 - give arg types
+  void Task2();
+../Hardware/Task.h(31): warning:  #1295-D: Deprecated declaration Task3 - give arg types
+  void Task3();
+../Hardware/Task.h(32): warning:  #1295-D: Deprecated declaration Buzzer - give arg types
+  void Buzzer();
+../Hardware/Task.h(39): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Hardware/Encoder.h(27): warning:  #1295-D: Deprecated declaration Encoder_Init - give arg types
+  void Encoder_Init();
+../Hardware/Encoder.h(29): warning:  #1295-D: Deprecated declaration Task_solver - give arg types
+  void Task_solver();
+../Hardware/Encoder.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif // ENCODER_H
+../Core/Src/main.c: 20 warnings, 0 errors
+compiling stm32h7xx_hal_dma_ex.c...
+compiling stm32h7xx_hal_pwr_ex.c...
+compiling stm32h7xx_hal_gpio.c...
+compiling system_stm32h7xx.c...
+compiling stm32h7xx_hal_i2c_ex.c...
+compiling stm32h7xx_hal_uart_ex.c...
+compiling stm32h7xx_hal_exti.c...
+compiling stm32h7xx_hal_tim_ex.c...
+compiling stm32h7xx_hal_uart.c...
+compiling stm32h7xx_hal_dma.c...
+compiling stm32h7xx_hal_tim.c...
+compiling stm32h7xx_hal_i2c.c...
+linking...
+Program Size: Code=24324 RO-data=828 RW-data=108 ZI-data=2724  
+FromELF: creating hex file...
+"H7Car\H7Car.axf" - 0 Error(s), 146 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM::CMSIS@5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32H7xx_DFP.4.0.0.pack
+                Keil::STM32H7xx_DFP@4.0.0
+                STMicroelectronics STM32H7 Series Device Support
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_H7Car
+  D:/Users/admin/Desktop/work/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@5.6.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Build Time Elapsed:  00:00:13
+</pre>
+</body>
+</html>
