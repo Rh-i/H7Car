@@ -8,7 +8,7 @@ const uint8_t SPEED_LOOP = 0;
 const uint8_t DIRECTION_LOOP = 1;
 
 DualPID ctrl = {
-    .Kp_speed = 10, .Ki_speed = 0.0, .Kd_speed = 10, .Kp_direction = 0.5, .Ki_direction = 0.0, .Kd_direction = 0.05, 
+    .Kp_speed = 100000000, .Ki_speed = 0.0, .Kd_speed = 1000, .Kp_direction = 0.5, .Ki_direction = 0.0, .Kd_direction = 0.05, 
     .prev_error = {0, 0}                                                                                               
 };
 
@@ -50,20 +50,20 @@ float Dual_PID_Calculate(DualPID *pid, float target, float current, uint8_t loop
 // 乘以10是把RPM转换成pwm
 int forward_left_pwm()
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 30;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 100;
 }
 
 int forward_right_pwm()
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 30;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + 20, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 100;
 }
 
 int sensor_left_pwm(int Sensor_pwm)
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM - Sensor_pwm / 10, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 30;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM - Sensor_pwm / 10, encoder_L1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 20;
 }
 
 int sensor_right_pwm(int Sensor_pwm)
 {
-  return Dual_PID_Calculate(&ctrl, BASE_RPM + Sensor_pwm / 10, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 30;
+  return Dual_PID_Calculate(&ctrl, BASE_RPM + Sensor_pwm / 10, encoder_R1.filtered_rpm, SPEED_LOOP, ENCODER_CYCLE) * 20;
 }

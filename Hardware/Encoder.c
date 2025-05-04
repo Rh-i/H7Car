@@ -16,13 +16,12 @@ volatile uint8_t Task_Count = 1;
 void Encoder_Init()
 {
     HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL); // L1 启动编码器
-    // HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL); // L2
+    HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL); // L2
     HAL_TIM_Encoder_Start(&htim5, TIM_CHANNEL_ALL); // R1
     // HAL_TIM_Encoder_Start(&htim8, TIM_CHANNEL_ALL); // R2
-    HAL_LPTIM_Encoder_Start(&hlptim2, 0);
 
     __HAL_TIM_SET_COUNTER(&htim3, 32767); // 清空定时器的计数值，以便下一次采样
-    // __HAL_TIM_SET_COUNTER(&htim4, 32767);
+    __HAL_TIM_SET_COUNTER(&htim4, 0);
     __HAL_TIM_SET_COUNTER(&htim5, 32767);
     // __HAL_TIM_SET_COUNTER(&htim8, 32767);
 }
@@ -39,7 +38,7 @@ void Encoder_Update(Encoder *enc, TIM_HandleTypeDef *htim) // 编码器更新函
 
 void Task_solver() // 放主函数while循环中 然后执行Task的任务 任务内的运动数据处理 就还在中断中进行 然后回来
 {
-    Task_Flag = __HAL_TIM_GET_COUNTER(&hlptim2);
+    Task_Flag = __HAL_TIM_GET_COUNTER(&htim4);
     if (Task_Flag == Task_Count == 1)
     {
         Buzzer(); // 切换模式响一次

@@ -175,6 +175,7 @@ int main(void)
     // Motor_Control(600,600);
     // Task_Flag = 2;
     // Task_Count = 2;
+    Motor_Control(Dual_PID_Calculate(&ctrl,0,encoder_L1.filtered_rpm,SPEED_LOOP,0.001), Dual_PID_Calculate(&ctrl,0,encoder_R1.filtered_rpm,SPEED_LOOP,0.001));
   }
   /* USER CODE END 3 */
 }

@@ -11,9 +11,9 @@
 typedef struct DualPID
 {
   // 内环（速度控制）
-  float Kp_speed, Ki_speed, Kd_speed;
+  double Kp_speed, Ki_speed, Kd_speed;
   // 方向环
-  float Kp_direction, Ki_direction, Kd_direction;
+  double Kp_direction, Ki_direction, Kd_direction;
   // 站立环
   float prev_error[2]; // 每个环的前一次误差
 } DualPID;
