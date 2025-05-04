@@ -196,7 +196,7 @@
       "uploadConfig": {
         "bin": "",
         "target": "stm32h7x",
-        "interface": "cmsis-dap-v1",
+        "interface": "stlink",
         "baseAddr": "0x08000000"
       },
       "uploadConfigMap": {

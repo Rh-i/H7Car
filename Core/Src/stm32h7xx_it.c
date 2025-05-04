@@ -274,7 +274,7 @@ void TIM6_DAC_IRQHandler(void)
 
     if (TaskState2 == MOVE_SENSOR) // 循迹 两次均用这个
     {
-      void Sensor_Dispose(); // 实时计算偏差
+      Sensor_Dispose(); // 实时计算偏差
       if (sensor.c || sensor.l1 || sensor.l2 || sensor.r1 || sensor.r2)
       {
         static int Sensor_pwm;
@@ -324,7 +324,7 @@ void TIM6_DAC_IRQHandler(void)
 
     if (TaskState34 == MOVE_SENSOR) // 循迹 八次均用这个
     {
-      void Sensor_Dispose(); // 实时计算偏差
+      Sensor_Dispose(); // 实时计算偏差
       if (sensor.c || sensor.l1 || sensor.l2 || sensor.r1 || sensor.r2)
       {
         static int Sensor_pwm34;
