@@ -58,6 +58,7 @@ void Task2()
     {
       Motor_Control(Task_left_pwm, Task_right_pwm);
     }
+    
     TaskState2 = MOVE_SENSOR;
 
     Buzzer(); // 结束响一次

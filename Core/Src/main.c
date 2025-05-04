@@ -170,11 +170,11 @@ int main(void)
 
     // 所有的任务都在这个函数里面 所以while循环会一直在这个函数内部执行 所以除了这个函数别的什么都不要写进while循环 如果需要oled屏幕显示的话 需要自己配置定时器中断显示 20hz就行
     // 这个代码需要旋钮编码器来选择模式 记得安装一个 任务执行只能1 2 3的顺序 通过旋转编码器选择模式  不能乱序执行 ||若要测试特定的就拧到对应位置测一次 然后断电|| 重复此前操作可以测试第二次 亦或者你直接把某个值写成对应的数据也可以
-    // void Task_solver();
-    Task2();
+    void Task_solver();
+    // Task2();
     // Motor_Control(600,600);
-    Task_Flag = 2;
-    Task_Count = 2;
+    // Task_Flag = 2;
+    // Task_Count = 2;
   }
   /* USER CODE END 3 */
 }
